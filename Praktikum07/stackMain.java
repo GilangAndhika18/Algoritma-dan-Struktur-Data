@@ -36,7 +36,8 @@ public class stackMain {
             System.out.println("2. Pop");
             System.out.println("3. Peek");
             System.out.println("4. Print");
-            System.out.println("5. Exit");
+            System.out.println("5. Get Max");
+            System.out.println("6. Exit");
             System.out.print("Input: ");
             String choose = sc.nextLine();
 
@@ -56,27 +57,34 @@ public class stackMain {
 
                 pakaian p = new pakaian(jenis, warna, merk, ukuran, harga);
                 stk.push(p);
-                break;
+                continue;
 
             case "print":
                 stk.print();
-                break;
+                continue;
             
             case "pop":
                 stk.pop();
-                break;
+                continue;
 
             case "peek":
                 stk.peek();
-                break;
+                continue;
+            
+            case "get max":
+                pakaian maxPakaian = stk.getMax();
+                if (maxPakaian != null) {
+                    System.out.println("Pakaian dengan harga tertinggi: ");
+                    System.out.println(maxPakaian.jenis + " " + maxPakaian.warna + " " + 
+                    maxPakaian.merk + " " + maxPakaian.ukuran + " " + maxPakaian.harga);
+                }
+                continue;
 
             case "exit":
                 menu = false;
                 break;
         
-            default:
-                System.out.println("Inputmu salah blok");
-                break;
+            
         }
         }
         sc.close();
