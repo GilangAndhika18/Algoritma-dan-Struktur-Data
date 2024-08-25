@@ -1,3 +1,5 @@
+import java.lang.reflect.InaccessibleObjectException;
+
 public class linkedList {
     node head;
 
@@ -68,9 +70,72 @@ public class linkedList {
         }
     }
 
+    public void insertBefore(int key, int input) {
+        if (isEmpty()) {
+            System.out.println("Linked list kosong");
+            return;
+        }
+
+        if (head.data == key) {
+            addFirst(input);
+            return;
+        }
+
+        node currentNode = head;
+        node newNode = new node(input, null);
+
+        while (currentNode.next != null && currentNode.next.data != key) {
+            currentNode = currentNode.next;
+        }
+
+        if (currentNode.next != null) {
+            newNode.next = currentNode.next;
+            currentNode.next = newNode;
+        } else {
+            System.out.println("Key tidak ditemukan dalam linked list");
+        }
+    }
+
+    public void insertAt(int index, int input) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index di luar batas");
+        }
+
+        if (index == 0) {
+            addFirst(input);
+            return;
+        }
+
+        node currentNode = head;
+        for (int i = 0; i < index -1; i++) {
+            if (currentNode == null) {
+                throw new IndexOutOfBoundsException("Indeks di luar batas");
+            }
+            currentNode = currentNode.next;
+        }
+
+        if (currentNode != null) {
+            node newNode = new node(input, currentNode.next);
+            currentNode.next = newNode;
+        } else {
+            throw new InaccessibleObjectException("Index di luar batas");
+        }
+    }
+
     public int getData(int index) {
         node currentNode = head;
 
+        int count = 0;
+        while (currentNode != null) {
+            count++;
+            currentNode = currentNode.next;
+        }
+
+        if (index >= count || index < 0) {
+            throw new IndexOutOfBoundsException("Index di luar batas");
+        }
+
+        currentNode = head;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
@@ -137,6 +202,31 @@ public class linkedList {
 
                 currentNode = currentNode.next;
             }
+        }
+    }
+
+    public void removeAt(int index) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Indeks di luar batas");
+        }
+
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
+
+        node currentNode = head;
+        for (int i = 0; i < index -1; i++) {
+            if (currentNode == null || currentNode.next == null) {
+                throw new IndexOutOfBoundsException("Indeks di luar batas");
+            }
+            currentNode = currentNode.next;
+        }
+
+        if (currentNode.next != null) {
+            currentNode.next = currentNode.next.next;
+        } else {
+            throw new IndexOutOfBoundsException("Indeks di luar batas");
         }
     }
 }

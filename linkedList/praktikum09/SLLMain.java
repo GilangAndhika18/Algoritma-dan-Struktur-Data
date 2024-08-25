@@ -19,5 +19,26 @@ public class SLLMain {
         myLinkedList.print();
         myLinkedList.removeLast();
         myLinkedList.print();
+
+        myLinkedList.addLast(600);
+        myLinkedList.addFirst(700);
+
+        System.out.println("Menambahkan sebelum 700");
+        myLinkedList.insertBefore(700, 650);
+        myLinkedList.print();
+
+        System.out.println("Menambahkan pada index ke-2:");
+        myLinkedList.insertAt(2, 550);
+        myLinkedList.print();
+
+        System.out.println("Menghapus pada index ke-2:");
+        myLinkedList.removeAt(2);
+        myLinkedList.print();
+        
+        try {
+            System.out.println("Data pada index ke-5: " + myLinkedList.getData(5));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
